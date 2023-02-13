@@ -14,7 +14,7 @@ function App(){
       let errors = {};
       if (!values.email) errors.email - "field required";
       if (!values.password) errors.password = "field required";
-
+      if (!(values.email.includes("@") && values.email.includes("."))) errors.emailFormat = "Please use an email" 
       return errors
     },
   });
@@ -30,9 +30,15 @@ function App(){
         onChange={formik.handleChange}
         value={formik.values.firstName}
       />
+      < br/>
       {formik.errors.email ? (
         <div id="emailError" style = {{color: "red"}}>
           {formik.errors.email}
+        </div>
+      ) : null}
+      {formik.errors.emailFormat ? (
+        <div id="emailError" style = {{color: "red"}}>
+          {formik.errors.emailFormat}
         </div>
       ) : null}
       <div>Password:</div>
@@ -43,6 +49,7 @@ function App(){
         onChange={formik.handleChange}
         value={formik.values.lastName}
       />
+      < br/>
       {formik.errors.password ? (
         <div id="pswError" style = {{color: 'red'}}>
           {formik.errors.password}
